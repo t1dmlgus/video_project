@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
+<mapper namespace="movie">
+	
+	<!-- 01. 영화목록 (검색) -->
+	<select id="movieList" resultType="com.example.spring01.domain.MovieVO">
+								<!-- 디비 AS MemberVo -->
+		select * from vt1_3
+		<include refid="search"></include>
+		order by mno desc
+	</select>
+	
+	<!-- 01. 영화 상세정보 (리스트) -->
+	<select id="view2Movie" resultType="com.example.spring01.domain.MovieVO">
+	
+	select * from vt1_2
+	where mno = #{mno}
+	
+	</select>
+	
+	
+	<!-- 01. 영화 상세정보 (단일)  -->
+	<select id="select2Movie" resultType="com.example.spring01.domain.MovieVO">
+	
+	
+	
+	select * from movie, grade
+	where mno = #{mno} and movie.grade_gno = grade.gno;
+	
+	</select>
+	
+	
+	<!-- 03. 영화 수정 -->
+	<update id="updateMovie">
+		
+		UPDATE movie, grade
+		set	
+			movie = #{movie},
+			runningtime = #{runningtime},
+			<!-- 등급 x -->
+			releaseday = #{releaseday},
+			nation = #{nation}
+		WHERE mno = #{mno} and movie.grade_gno = grade.gno;
+		
+				
+			
+	</update>
+	
+	
+	<!-- 04. 영화 삭제 -->
+	<delete id="deleteMovie">
+		DELETE FROM movie
+		where mno = #{mno}
+	
+	</delete>
+	
+	
+	<!-- 01. 비디오목록 (검색)-->
+	
+	<select id="listAll" resultType="com.example.spring01.domain.MovieVO">
+	
+		<!-- 회원권환이 없는 게시글 목록 쿼리 -->
+		<!-- select bno, title, content, writer, regdate, viewcnt from tbl_board -->
+		
+			select * from vt1
+		<!--  where 절을 include 태그로 삽입-->  
+		<include refid="search"></include>
+		order by vno desc
+
+	</select>	
+
+
+	<!-- 02_01. 영화 검색 -->
+	
+	<select id ="searchMovie">
+	
+		select * from movie
+	
+	</select>
+
+	<!-- 02. 영화 등록 -->
+	<insert id="insertMovie">
+		
+		insert into movie(movie, runningtime, releaseday, nation, grade_gno) values
+		(#{movie},#{runningtime},#{releaseday},#{nation},#{grade})
+	</insert>
+
+	<!-- 03. 비디오 등록 -->
+	<insert id="insertVideo">
+		
+		insert into video(movie_mno) values
+		(#{mno})
+	</insert>
+	
+	
+	
+	<!-- 03. 영화 상세조회 				??               -->
+	<select id="viewMember" resultType="com.example.spring01.domain.MovieVO">
+		
+		select * from vt1_2
+		WHERE vno = #{vno}
+		
+		
+	</select>
+	
+	
+	<select id="countArticle" resultType="int">
+		
+		select count(*) 
+		from movie m 
+		
+		
+		<!-- where 절을 include 태그로 삽입 -->
+		<include refid="search"></include>
+	
+	
+	</select>
+	
+		<sql id="search">
+		<choose>
+			<!-- 검색옵션이 전체 검색일 경우 -->
+			<when test="searchOption == 'all'">
+			
+				where movie like CONCAT('%',#{keyword},'%')
+				or genre like CONCAT('%',#{keyword},'%')
+				or grade like CONCAT('%',#{keyword},'%')
+				
+			</when>
+			
+			<!--  전체 검색이 아닐 경우 -->
+			<otherwise>
+				
+				where ${searchOption} like CONCAT('%',#{keyword},'%')
+				
+			</otherwise>
+			
+		</choose>
+	
+	</sql>
+	
+
+
+</mapper>

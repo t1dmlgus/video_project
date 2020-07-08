@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
+<mapper namespace="member">
+	
+	<!-- 01. 회원목록 -->
+	<select id="memberList" resultType="com.example.spring01.domain.MemberVO">
+								<!-- 디비 AS MemberVo -->
+		select userId, userName, mail, regdate as regDate 
+	from member order by userid;
+	</select>
+	
+	
+	<!-- 01_02. 검색 회원목록 -->
+	
+	<select id="listAll" resultType="com.example.spring01.domain.MemberVO">
+	
+		<!-- 회원권환이 없는 게시글 목록 쿼리 -->
+		<!-- select bno, title, content, writer, regdate, viewcnt from tbl_board -->
+		
+			select userId, userPass, userName, mail, phone, regdate as regDate, verify  
+			from member
+	
+		<include refid="search"></include>
+		
+	</select>	
+	
+	
+	<!-- 02. 회원 등록 -->
+	<insert id="insertMember">
+		
+			INSERT INTO member
+			(userId, userPass, userName, mail)
+		VALUES 
+			(#{userId}, #{userPass}, #{userName}, #{mail})
+	</insert>
+	
+	
+	
+	<!-- 03. 회원정보 상세조회 -->
+	<select id="viewMember" resultType="com.example.spring01.domain.MemberVO">
+		SELECT 
+		  userId, 
+		  userName,
+		  mail,
+		  regdate AS regDate,
+		  verify
+		FROM member
+		WHERE userId = #{userId}
+	</select>
+	
+	<!-- 04. 회원정보 수정처리 -->
+	<update id="updateMember">
+		UPDATE member
+		SET
+			userPass = #{userPass},
+			userName = #{userName},
+			mail = #{mail}
+		WHERE userId = #{userId}	
+	</update>
+	
+	
+	
+	<!-- 05. 회원정보 삭제 처리 -->
+	<delete id="deleteMember">
+		DELETE FROM member
+		WHERE userId = #{userId}
+	</delete>
+	
+	<!-- 06. 수정 및 삭제 시 비밀번호 체크 -->
+	<select id="checkPw" resultType="int">
+		SELECT 
+			COUNT(*) 
+		FROM member
+		WHERE userId = #{userId} AND userPass = #{userPass}
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<!-- 06. 로그인 처리 -->
+	
+	<select id="loginCheck" resultType="String">
+		select userName from member
+		WHERE userId = #{userId} AND userPass = #{userPass}
+	</select>
+	
+	
+	
+	<sql id="search">
+		<choose>
+			<!-- 검색옵션이 전체 검색일 경우 -->
+			<when test="searchOption == 'all'">
+			
+				where userId like CONCAT('%',#{keyword},'%')
+				or userName like CONCAT('%',#{keyword},'%')
+				or mail like CONCAT('%',#{keyword},'%')
+				
+			</when>
+			
+			<!--  전체 검색이 아닐 경우 -->
+			<otherwise>
+				
+				where ${searchOption} like CONCAT('%',#{keyword},'%')
+				
+			</otherwise>
+			
+		</choose>
+	
+	</sql>
+	
+	
+	
+</mapper>

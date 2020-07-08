@@ -1,0 +1,122 @@
+
+/*member-header*/
+.header{clear: both}
+.header .time{text-align: right; margin-top: 20px; margin-right: 30px; 
+				color: #003458; font-size: 16px;}
+.header .login1{display: inline-block; float: right; margin-top: 10px; margin-right: 30px;}
+.header .login1 span{font-weight: bold; font-size: 17px;}
+.header .logout1{font-size: 14px;background: #003458; float: right;padding: 3px 7px;
+				border-radius: 5px;margin-right: 17px;margin-top: 6px;}
+.header .logout1 a{color:#fff;}
+.header .lg1{font-size: 14px;background: #003458; color:#fff;float: right;padding: 3px 7px;
+				border-radius: 5px;margin-right: 17px;margin-top: 6px;}
+
+/*member-menu*/
+.header .nav{text-align: center;font-size: 17px;font-weight: bold;}
+.header .btnBack{background: #fff; }
+
+
+
+/* main */
+.main h1{font-size:40px; font-weight:bold; margin-left: 18%; margin-top: 30px;}
+.main div{margin: 20px; display: inline-block;width:200px; height:200px;
+			background: #fff;text-align: center;border-radius: 4%;
+			position:absolute; top:50%; left:30%; margin-top:20px; margin-left:-100px;
+			font-size: 20px;border: 1px solid #c2c2c2}
+
+
+.main .div1 i{font-size: 70px;margin-top: 30px;margin-bottom: 40px}	
+.main .div2 i{font-size: 70px;margin-top: 30px;margin-bottom: 40px}			
+.main .div2{margin-left: 160px}
+
+/* board */
+
+.board{}
+.board .tb1{text-align: center; margin:0 auto; margin-top: 	30px;   width: 80%;
+    border: 1px 0px solid #333;
+    border-collapse: collapse;}
+.board .tb1 thead tr{margin-bottom: 7px}
+.board .tb1 tbody tr{border-bottom: 1px solid #333333;
+    padding: 10px; margin-top: 	30px;}
+
+
+
+/* view */
+.view{margin-top: 60px;margin-left: 70px;}
+.view .title{display: inline-block;font-size: 22px; font-weight: bold; margin-bottom: 6px}
+.view .write_date{display: inline-block;float: right;margin-right: 20%;}
+.view .content{clear: both;width: 80%; font-size: 23px;}
+.view .write{margin-top: 16px;background: none}
+.view button{font-size: 20px; background-color: #fff; margin-top: 13px;}
+.view .btnInsert{margin-left: 30%;margin-right: 6%}
+.view .btnDelete{}
+
+
+
+
+
+/* login */
+.login{display: inline-block;position:absolute; top:30%; left:40%; margin-top:20px; margin-left:-100px;
+			font-size: 20px;border: 1px solid #c2c2c2}
+.login .tb2{text-align: center;}
+.login .tb2 button{background: none;}
+#btnLogin{margin: 5px; margin-right: 50px;}
+
+/* write */
+.write{margin-top: 	30px; margin-left: 	20px;font-size: 13px;	}
+.write .title{margin:3px;} 
+.write .title label{margin-right: 	17px}
+.write .writer{margin:3px;} 
+.write .writer label{margin-right: 	5px} 
+
+.write .content1{margin-left:47px;width: 80%; height: 300px	} 
+
+.write .btn01{font-size: 27px; margin-left: 60%; background: #fff;margin-top: 8px;} 
+
+/* member_write */
+.member_write{position:absolute; top:50%; left:30%; margin-top:20px; margin-left:-100px;
+			font-size: 20px;border: 1px solid #c2c2c2}
+
+
+
+
+/* account_day */
+.account_day{}
+.account_day .co1{color:#7a7a7a;}
+.account_day .co2{color:#3eed6c;}
+.account_day h1{margin:30px 50px; font-weight: bold;font-size: 16px;}
+.account_day h2{margin:30px 50px;}
+.account_day .totalCount{display: inline-block;margin:40px 130px; 
+							font-size: 17px; color: #7a7979}
+.account_day .totalCount span{font-size: 27px; color: #122343; font-weight: bold;}
+.account_day .sumPric{display: inline-block;float: right; margin:40px 170px;
+							font-size: 17px; color: #7a7979}
+.account_day .sumPric span{font-size: 27px; color: red; font-weight: bold;}							
+
+
+
+/* account_month */
+.account_month{}
+.account_month h2{margin:30px 50px; font-weight: bold;font-size: 16px;}
+.account_month .fm1{margin:30px 50px; 	}
+.account_month .sumState{display: inline-block;margin:40px 130px; 
+							font-size: 17px; color: #7a7979}
+.account_month .sumState span{font-size: 27px; color: #122343; font-weight: bold;}
+.account_month .sumPric{display: inline-block;float: right; margin:40px 170px;
+							font-size: 17px; color: #7a7979}
+.account_month .sumPric span{font-size: 27px; color: red; font-weight: bold;}
+
+
+/* account_year */
+.account_year{}
+.account_year h2{margin:30px 50px; font-weight: bold;font-size: 16px;}
+.account_year .fm1{margin:30px 50px; 	}
+.account_year .sumState{display: inline-block;margin:40px 130px; 
+							font-size: 17px; color: #7a7979}
+.account_year .sumState span{font-size: 27px; color: #122343; font-weight: bold;}
+.account_year .sumPric{display: inline-block;float: right; margin:40px 170px;
+							font-size: 17px; color: #7a7979}
+.account_year .sumPric span{font-size: 27px; color: red; font-weight: bold;}
+
+.page{text-align: center; margin-top: 30px;}
+.page span{margin-left: 10px;}

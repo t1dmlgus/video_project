@@ -1,0 +1,113 @@
+@charset "utf-8";
+
+/* 레이아웃 */
+#header{width: 100%; height: ;border-bottom: 1px solid #c6c6c6; background: rgba(0,0,0,0.0); }
+#mNav{display: none; position: absolute; top: 13px; right: 14px;}
+#banner{position: relative;}
+
+
+/* container */
+.container{position: relative; width: 1200px; margin: 0 auto; 
+	background:rgba(0,0,0,0.); ;}
+
+/* row */
+.row{padding: 0px 28px; }
+
+
+/* 모바일 메뉴 */
+	
+
+/* 헤더 */
+
+
+
+/* 배너 */
+
+
+/* sections */
+#contents{  /* fallback for old browsers */
+/* Chrome 10-25, Safari 5.1-6 */
+
+/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  /* fallback for old browsers */
+
+  display: flex; height: 80vh;
+  justify-content: center; margin-top: 70px; 
+ }
+/*  section */
+
+
+
+.section1{
+    display: flex; flex-direction: column; margin-right: 18%;
+}
+
+.section1 > button i{font-size: 48px; transition: .3s;}
+.section1 > button span{display: block; font-size: 19px;margin-top: 20px; font-weight: bold; transition: .3s;}
+.section1 > button:hover{box-shadow: 7px 6px 8px rgb(146, 146, 146); color: rgb(183, 13, 189);}
+
+.section1 > button{width: 230px; height: 210px; margin-bottom: 30px; border-radius: 8px; transition: .3s}
+
+
+.section2{
+    display: flex; flex-direction: column;
+}
+
+.section2 > button i{font-size: 40px; transition: .0.7s;}
+.section2 > button span{display: block; font-size: 19px;margin-top: 20px; font-weight: bold; transition: .0.7s;}
+.section2 > button:hover{box-shadow: 7px 6px 8px rgb(146, 146, 146); color: rgb(183, 13, 189);}
+
+.section2 > button{width: 230px; height: 210px; margin-bottom: 30px; border-radius: 8px; transition: .3s}
+
+
+/* 검색 */
+
+.search-box{
+	padding: 10px; position: absolute; top:20%; left: 50%; transform: translate(-50%, -50%);
+	height: 30px; border-radius: 30px; border: 1px solid #51e3d4; transition: .3s
+}
+
+.search-box:hover{
+
+	box-shadow: 0 0 .5px 1px #51e3d4;
+}
+
+.search-txt{background-color:transparent;  
+	padding: 0; width: 240px; border: none; outline: none; 
+	font-size: 1rem; line-height: 30px; transition: .4s
+}
+.searchOption{background-color:transparent;
+outline: none; border: 0; float: left; margin-top: 8px;}
+
+.search-btn{
+	background-color:transparent;  border:0px transparent solid;
+
+	font-size: 22px;	
+	width: 30px;
+	height: 30px;
+	border-radius: 30px;
+	color: #51e3d4;
+	margin-top: -3px;
+}
+
+ 
+
+
+
+
+
+ 
+
+
+
+/* 슬라이드 */
+
+
+
+
+/* section -- 무비 */
+	
+
+
+
+/* @미디어 쿼리 */

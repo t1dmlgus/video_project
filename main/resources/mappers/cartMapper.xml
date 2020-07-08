@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
+<mapper namespace="cart">
+	
+	<!-- 01. 장바구니 추가 --> 
+	
+	<insert id="insertCart">
+		
+		insert into rent(member_uno, video_vno, amount)
+		values((select uno from member where userId=#{userId}), #{vno}, 1);
+		
+		update video
+		set state = 0
+		where vno = #{vno};
+		
+	</insert>
+	
+	
+	
+	
+		<!-- 01_02. 장바구니 추가 --> 
+	
+	<insert id="ReturnCart">
+		
+		update rent
+		set returndate = now()
+		where video_vno = #{vno} ;
+
+		
+		update video
+		set state = 1
+		where vno = #{vno};
+		
+		
+		
+	</insert>
+
+	
+	<!-- 02_01. 대여 목록 (관리자)-->
+	<select id="listCart" resultType="com.example.spring01.domain.CartVO">
+		
+		select * from vt2	
+		order by state desc
+		
+	</select>
+	
+		<!-- 02_01. 대여 목록 (관리자)-->
+	<select id="listCartPage" parameterType="hashMap" resultType="com.example.spring01.domain.CartVO">
+		
+		select * from vt2	
+		order by state desc
+		limit #{displayPost}, #{postNum}
+		
+	</select>
+	
+	
+	<!-- 02_02. 대여 목록 (개인)-->
+	<select id="listCart2" resultType="com.example.spring01.domain.CartVO">
+		
+		select * from vt2
+		where userId = #{userId} and state = 0
+		order by rno
+	</select>
+	
+	
+		
+	<!-- 09. 정산 관리 (일)-->
+	<select id="priceList" resultType="com.example.spring01.domain.CartVO">
+		
+		select *
+		from vt2
+		where date(rentdate) = date(now())
+		order by state desc;
+		
+	</select>
+	
+	
+
+	<!-- 10. 정산 관리 (월) -->
+	<select id="priceMonth" resultType="com.example.spring01.domain.CartVO">
+
+		select date(rentdate) as rentdate, count(rentdate) as state from vt2 
+		where date(rentdate) between '${month}' 
+		and last_day('${month}')
+		group by date(rentdate)
+		order by rentdate
+	
+	
+	</select>
+
+	<!-- 11. 정산 관리 (년) -->
+	<select id="priceYear" resultType="com.example.spring01.domain.CartVO">
+	
+
+		select date(rentdate) as rentdate, count(rentdate) as state from vt2
+		where date(rentdate) between '${year}' 
+		and last_day(date_add('${year}', interval 12 month))
+		group by month(rentdate)
+		order by rentdate
+	
+	</select>
+	
+	
+	<!-- 12. 게시물 총 개수 -->
+	<select id="count" resultType="int">
+		
+		select count(rno) from vt2;
+	
+	</select>
+	
+	
+	
+	
+	
+	<!-- 02. 장바구니 목록
+	<select id="listCart" resultType="com.example.spring01.domain.CartVO">
+		select r.rno, u.userId, v.vno, u.userName, m.movie, r.amount 
+		from member u, video v, rent r, movie m
+		where u.userId = r.member_userId 
+		and v.vno = r.video_vno
+		and v.mno = m. mno
+		and r.member_userId = #{userId}
+		order by r.rno 
+	</select>
+	 -->
+	 
+	<!-- 03. 장바구니 전체 금액 -->
+	<select id="sumMoney" resultType="int">
+		select IFNULL(SUM(video_price * amount), 0) money
+		from rent r, video v
+		where r.video_vno = v.vno
+        and r.member_uno = #{userId}
+	</select>
+	
+	<!-- 04. 장바구니 수정 -->
+	
+	
+	<!-- 05. 장바구니 삭제 -->
+	<delete id="deleteCart">
+		delete from rent r
+		where r.member_userId =#{userId}
+	</delete>
+	
+	
+	<!--  06. 장바구니에 동일한 상품 레코드 확인 
+	<select id="countCart" resultType="int">
+		select count(*)
+		from rent
+		where userId =#{userId} and video_vno = #{vno};
+		
+	</select>
+	-->
+	<!--  7. 장바구니에 동일한 상품이 존재하면 수정 -->
+	
+	
+</mapper>
